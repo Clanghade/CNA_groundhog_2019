@@ -16,6 +16,15 @@ void displayHelp(void)
     exit(0);
 }
 
+bool isNumber(std::string line)
+{
+    for (int i = 0; i < line.length(); i++) {
+        if (!std::isdigit(line[i]) && line[i] != '.')
+            return (false);
+    }
+    return (true);
+}
+
 int main(int ac, char **av)
 {
     if (ac == 1) return (84);
@@ -29,6 +38,8 @@ int main(int ac, char **av)
         std::cout << line << std::endl;
         if (line.compare("STOP") == 0)
             break;
+        if (line.compare("EOF") == 0 || !isNumber(line))
+            return (84);
         groundhog.addInput(line);
         groundhog.displayData();
     }
