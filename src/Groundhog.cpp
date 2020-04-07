@@ -128,9 +128,9 @@ void Groundhog::computeRelative(void)
     }
     res = (_values[_values.size() - 1] * 100) / _relativeNdays;
     r = res;
-    if ((res - r) > 0.5 && (res - r) > 0)
+    if ((res - r) > 0.5)
         r += 1;
-    else if ((res - r) < 0.5 && (res - r) < 0)
+    else if ((res - r) < -0.5)
         r -= 1;
     r -= 100;
     if (_values[_values.size() - 1] > _relativeNdays)
