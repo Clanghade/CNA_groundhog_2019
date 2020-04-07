@@ -133,6 +133,8 @@ void Groundhog::computeRelative(void)
     else if ((res - r) < 0.5 && (res - r) < 0)
         r -= 1;
     r -= 100;
+    if (_values[_values.size() - 1] > _relativeNdays)
+        r = abs(r);
     std::cout << r;
     if ((r < 0 && _lastR > 0) || (r > 0 && _lastR < 0))
         _isSwitch = true;
