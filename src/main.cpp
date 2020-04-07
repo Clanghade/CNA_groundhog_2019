@@ -33,7 +33,7 @@ int main(int ac, char **av)
 
     if (line.compare("-h") == 0)
         displayHelp();
-    if (line.compare("0") == 0)
+    if (line.compare("0") == 0 || !isNumber(line) || line[0] == '-')
         return (84);
     groundhog.setPeriod(std::stoi(line));
     while (std::getline(std::cin, line))
