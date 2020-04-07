@@ -61,13 +61,15 @@ void Groundhog::setPeriod(unsigned int newPeriod)
 void Groundhog::addInput(const std::string &newInput)
 {
     double nInput = std::stod(newInput);
+    size_t size = _values.size();
 
     if (_values.size() == 0)
         _relativeNdays = nInput;
     if (_values.size() == _period)
         _values.erase(_values.begin());
     _values.push_back(nInput);
-    if (_values.size() == 1) {
+    if (size == 0)
+    {
         _previousValue = nInput;
         return;
     }
@@ -161,15 +163,15 @@ void Groundhog::bollinger(double s)
     double bollingerB = computeAverage() - 1.88 * s;
     if (bollingerB < bollingerA)
     {
-        if (currentValue <= bollingerB)
+        if (currentValue < bollingerB)
             _weird.push_back(std::make_pair(abs(bollingerB - currentValue), currentValue));
-        else if (currentValue >= bollingerA)
+        else if (currentValue > bollingerA)
             _weird.push_back(std::make_pair(abs(currentValue - bollingerA), currentValue));
     } else
     {
-        if (currentValue >= bollingerB)
+        if (currentValue > bollingerB)
             _weird.push_back(std::make_pair(abs(currentValue - bollingerB), currentValue));
-        else if (currentValue <= bollingerA)
+        else if (currentValue < bollingerA)
             _weird.push_back(std::make_pair(abs(bollingerA - currentValue), currentValue));
     }
 }
