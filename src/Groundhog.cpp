@@ -147,6 +147,26 @@ double Groundhog::computeAverage(void) const
     return (t / _values.size());
 }
 
+void Groundhog::bollinger(double s)
+{
+    double currentValue = _values[_values.size() - 1];
+    double bollingerA = computeAverage() + 1.88 * s;
+    double bollingerB = computeAverage() - 1.88 * s;
+    if (bollingerB < bollingerA)
+    {
+        if (currentValue <= bollingerB)
+            _weird.push_back(std::make_pair(abs(bollingerB - currentValue), currentValue));
+        else if (currentValue >= bollingerA)
+            _weird.push_back(std::make_pair(abs(currentValue - bollingerA), currentValue));
+    } else
+    {
+        if (currentValue >= bollingerB)
+            _weird.push_back(std::make_pair(abs(currentValue - bollingerB), currentValue));
+        else if (currentValue <= bollingerA)
+            _weird.push_back(std::make_pair(abs(bollingerA - currentValue), currentValue));
+    }
+}
+
 void Groundhog::computeStandard(void)
 {
     if (_values.size() < _period)
@@ -159,18 +179,5 @@ void Groundhog::computeStandard(void)
         variance += std::pow(_values[i] - computeAverage(), 2);
     double s = std::sqrt(variance / _values.size());
     std::cout << std::fixed << std::setprecision(2) << s;
-    double currentValue = _values[_values.size() - 1];
-    double bollinger = computeAverage() + 1.88 * s;
-    if (currentValue >= bollinger)
-    {
-        _weird.push_back(std::make_pair(currentValue - bollinger, currentValue));
-    }
-    else
-    {
-        bollinger = computeAverage() - 1.88 * s;
-        if (currentValue <= bollinger) 
-        {
-            _weird.push_back(std::make_pair(bollinger - currentValue, currentValue));
-        }
-    }
+    bollinger(s);
 }
