@@ -37,8 +37,7 @@ void Groundhog::finalDisplay(void)
         std::cout << _weird.size() << " weirdest values are [";
         std::sort(_weird.begin(), _weird.end(), sorting);
         std::cout << std::setprecision(1);
-        if (_weird.size() != 0)
-        {
+        if (_weird.size() != 0) {
             for (size_t i = 0; i < _weird.size() - 1; i++)
                 std::cout << _weird[i].second << ", ";
             std::cout << _weird[_weird.size() - 1].second;
@@ -101,13 +100,11 @@ void Groundhog::computeIncrease(void) const
 {
     double inc = 0;
 
-    if (_increase.size() != _period)
-    {
+    if (_increase.size() != _period) {
         std::cout << "nan";
         return;
     }
-    for (size_t i = 0; i < _increase.size(); i++)
-    {
+    for (size_t i = 0; i < _increase.size(); i++) {
         inc += (_increase[i] > 0 ? _increase[i] : 0);
     }
     inc /= _increase.size();
@@ -121,8 +118,7 @@ void Groundhog::computeRelative(void)
     double res = 0;
     int r = 0;
 
-    if (_increase.size() != _period)
-    {
+    if (_increase.size() != _period) {
         std::cout << "nan";
         return;
     }
@@ -153,8 +149,7 @@ double Groundhog::computeAverage(void) const
 
 void Groundhog::computeStandard(void)
 {
-    if (_values.size() < _period)
-    {
+    if (_values.size() < _period) {
         std::cout << "nan";
         return;
     }
@@ -164,14 +159,11 @@ void Groundhog::computeStandard(void)
     double s = std::sqrt(variance / _values.size());
     std::cout << std::fixed << std::setprecision(2) << s;
     double up = computeAverage() + 1.88 * s;
-    if (_values[_values.size() - 1] >= up)
-    {
+    if (_values[_values.size() - 1] >= up) {
         _weird.push_back(std::make_pair(_values[_values.size() - 1] - up, _values[_values.size() - 1]));
-    } else
-    {
+    } else {
         up = computeAverage() - 1.88 * s;
-        if (_values[_values.size() - 1] <= up)
-        {
+        if (_values[_values.size() - 1] <= up) {
             _weird.push_back(std::make_pair(up - _values[_values.size() - 1], _values[_values.size() - 1]));
         }
     }
