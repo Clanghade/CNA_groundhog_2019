@@ -27,17 +27,24 @@ bool sorting(std::pair<double, double>f, std::pair<double, double>s)
 
 Groundhog::~Groundhog()
 {
-    std::cout << "Global tendency switched "<< _switch << " times" << std::endl
-              << _weird.size() << " weirdest values are [";
-    std::sort(_weird.begin(), _weird.end(), sorting);
-    std::cout << std::setprecision(1);
-    if (_weird.size() != 0)
-    {
-        for (size_t i = 0; i < _weird.size() - 1; i++)
-            std::cout << _weird[i].second << ", ";
-        std::cout << _weird[_weird.size() - 1].second;
+}
+
+void Groundhog::finalDisplay(void)
+{
+    if (_switch != 0)
+        std::cout << "Global tendency switched "<< _switch << " times" << std::endl;
+    if (_weird.size() != 0) {
+        std::cout << _weird.size() << " weirdest values are [";
+        std::sort(_weird.begin(), _weird.end(), sorting);
+        std::cout << std::setprecision(1);
+        if (_weird.size() != 0)
+        {
+            for (size_t i = 0; i < _weird.size() - 1; i++)
+                std::cout << _weird[i].second << ", ";
+            std::cout << _weird[_weird.size() - 1].second;
+        }
+        std::cout << "]" << std::endl;
     }
-    std::cout << "]" << std::endl;
 }
 
 void Groundhog::setPeriod(unsigned int newPeriod)

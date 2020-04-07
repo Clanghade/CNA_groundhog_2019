@@ -26,7 +26,7 @@ class Groundhog {
         void computeRelative(void);
         void computeStandard(void);
         double computeAverage(void) const;
-
+        void finalDisplay(void);
         void setPeriod(unsigned int newPeriod);
         void addInput(const std::string &newInput);
 

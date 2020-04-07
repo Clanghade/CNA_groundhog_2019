@@ -35,7 +35,6 @@ int main(int ac, char **av)
         displayHelp();
     groundhog.setPeriod(std::stoi(line));
     while (std::getline(std::cin, line)) {
-        std::cout << line << std::endl;
         if (line.compare("STOP") == 0)
             break;
         if (line.compare("EOF") == 0 || !isNumber(line))
@@ -43,5 +42,6 @@ int main(int ac, char **av)
         groundhog.addInput(line);
         groundhog.displayData();
     }
+    groundhog.finalDisplay();
     return (0);
 }
