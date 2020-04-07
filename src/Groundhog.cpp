@@ -149,7 +149,8 @@ double Groundhog::computeAverage(void) const
 
 void Groundhog::computeStandard(void)
 {
-    if (_values.size() < _period) {
+    if (_values.size() < _period)
+    {
         std::cout << "nan";
         return;
     }
@@ -158,13 +159,18 @@ void Groundhog::computeStandard(void)
         variance += std::pow(_values[i] - computeAverage(), 2);
     double s = std::sqrt(variance / _values.size());
     std::cout << std::fixed << std::setprecision(2) << s;
-    double up = computeAverage() + 1.88 * s;
-    if (_values[_values.size() - 1] >= up) {
-        _weird.push_back(std::make_pair(_values[_values.size() - 1] - up, _values[_values.size() - 1]));
-    } else {
-        up = computeAverage() - 1.88 * s;
-        if (_values[_values.size() - 1] <= up) {
-            _weird.push_back(std::make_pair(up - _values[_values.size() - 1], _values[_values.size() - 1]));
+    double currentValue = _values[_values.size() - 1];
+    double bollinger = computeAverage() + 1.88 * s;
+    if (currentValue >= bollinger)
+    {
+        _weird.push_back(std::make_pair(currentValue - bollinger, currentValue));
+    }
+    else
+    {
+        bollinger = computeAverage() - 1.88 * s;
+        if (currentValue <= bollinger) 
+        {
+            _weird.push_back(std::make_pair(bollinger - currentValue, currentValue));
         }
     }
 }
