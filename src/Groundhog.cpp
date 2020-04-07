@@ -61,8 +61,7 @@ void Groundhog::addInput(const std::string &newInput)
     if (_values.size() == _period)
         _values.erase(_values.begin());
     _values.push_back(nInput);
-    if (_values.size() == 1)
-    {
+    if (_values.size() == 1) {
         _previousValue = nInput;
         return;
     }
@@ -129,8 +128,10 @@ void Groundhog::computeRelative(void)
     }
     res = (_values[_values.size() - 1] * 100) / _relativeNdays;
     r = res;
-    if (res - r > 0.5)
+    if ((res - r) > 0.5 && (res - r) > 0)
         r += 1;
+    else if ((res - r) < 0.5 && (res - r) < 0)
+        r -= 1;
     r -= 100;
     std::cout << r;
     if ((r < 0 && _lastR > 0) || (r > 0 && _lastR < 0))

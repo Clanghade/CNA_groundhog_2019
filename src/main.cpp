@@ -19,7 +19,7 @@ void displayHelp(void)
 bool isNumber(std::string line)
 {
     for (int i = 0; i < line.length(); i++) {
-        if (!std::isdigit(line[i]) && line[i] != '.')
+        if (!std::isdigit(line[i]) && line[i] != '.' && line[i] != '-')
             return (false);
     }
     return (true);
