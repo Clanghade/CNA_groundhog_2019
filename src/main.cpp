@@ -37,11 +37,14 @@ int main(int ac, char **av)
     while (std::getline(std::cin, line)) {
         if (line.compare("STOP") == 0)
             break;
-        if (line.compare("EOF") == 0 || !isNumber(line))
+        std::cout << line << std::endl;
+        if (line.compare("EOF") == 0 || !isNumber(line) || line.compare("") == 0)
             return (84);
         groundhog.addInput(line);
         groundhog.displayData();
     }
+    if (!groundhog.enoughValues())
+        return (84);
     groundhog.finalDisplay();
     return (0);
 }

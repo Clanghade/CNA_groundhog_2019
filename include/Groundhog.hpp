@@ -30,6 +30,7 @@ class Groundhog {
         void setPeriod(unsigned int newPeriod);
         void addInput(const std::string &newInput);
         void bollinger(double);
+        bool enoughValues(void);
 
         unsigned int getPeriod(void) const;
         std::vector<double> getInputs(void) const;

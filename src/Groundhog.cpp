@@ -46,6 +46,13 @@ void Groundhog::finalDisplay(void)
     }
 }
 
+bool Groundhog::enoughValues(void)
+{
+    if (_period != _values.size())
+        return (false);
+    return (true);
+}
+
 void Groundhog::setPeriod(unsigned int newPeriod)
 {
     _period = newPeriod;
