@@ -15,7 +15,7 @@ Groundhog::Groundhog()
     _previousValue = 0;
     _relativeNdays = 0;
     _period = 0;
-    _lastR = 0;
+    _lastR = 9999;
     _switch = 0;
     _isSwitch = false;
 }
@@ -139,7 +139,9 @@ void Groundhog::computeRelative(void)
     if (_values[_values.size() - 1] > _relativeNdays)
         r = abs(r);
     std::cout << r;
-    if ((r < 0 && _lastR > 0) || (r > 0 && _lastR < 0))
+    if (_lastR == 9999)
+        _lastR = r;
+    else if ((r < 0 && _lastR >= 0) || (r >= 0 && _lastR < 0))
         _isSwitch = true;
     _lastR = r;
     _relativeNdays = _values[0];
