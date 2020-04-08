@@ -33,8 +33,11 @@ int main(int ac, char **av)
 
     if (line.compare("-h") == 0)
         displayHelp();
+    if (line.compare("0") == 0 || !isNumber(line) || line[0] == '-')
+        return (84);
     groundhog.setPeriod(std::stoi(line));
-    while (std::getline(std::cin, line)) {
+    while (std::getline(std::cin, line))
+    {
         if (line.compare("STOP") == 0)
             break;
         if (line.compare("EOF") == 0 || !isNumber(line) || line.compare("") == 0)
@@ -42,7 +45,7 @@ int main(int ac, char **av)
         groundhog.addInput(line);
         groundhog.displayData();
     }
-    if (!groundhog.enoughValues())
+    if (!groundhog.enoughValues() || line.compare("STOP") != 0)
         return (84);
     groundhog.finalDisplay();
     return (0);
