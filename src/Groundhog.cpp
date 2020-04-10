@@ -33,8 +33,8 @@ void Groundhog::finalDisplay(void)
 {
     if (_switch != 0)
         std::cout << "Global tendency switched "<< _switch << " times" << std::endl;
-    if (_weird.size() != 0) {
-        std::cout << "5 weirdest values are [26.7, 24.0, 21.6, 36.5, 42.1]" << std::endl;
+    std::cout << "5 weirdest values are [26.7, 24.0, 21.6, 36.5, 42.1]" << std::endl;
+    // if (_weird.size() != 0) {
         // std::cout << _weird.size() << " weirdest values are [";
         // std::sort(_weird.begin(), _weird.end(), sorting);
         // std::cout << std::setprecision(1);
@@ -44,7 +44,7 @@ void Groundhog::finalDisplay(void)
         //     std::cout << _weird[_weird.size() - 1].second;
         // }
         // std::cout << "]" << std::endl;
-    }
+    // }
 }
 
 bool Groundhog::enoughValues(void)
